@@ -1,6 +1,3 @@
-Segue o código completo já com as alterações aplicadas: fundo branco, paleta Arrow, sidebar clara, tabs ajustadas, botões na cor azul Arrow, cards dos KPIs estilizados, valores em `K`, `m` e `Bn`, e cores verde/vermelho para valores positivos/negativos.
-
-```python id="5ywlsx"
 from __future__ import annotations
 
 import streamlit as st
@@ -395,6 +392,3 @@ with data_tab:
         file_name="financial_kpis_filtered.csv",
         mime="text/csv",
     )
-```
-
-Removi também o bloco antigo que estava comentado entre `""" ... """`, porque ele já não é necessário e poderia confundir futuras manutenções.
