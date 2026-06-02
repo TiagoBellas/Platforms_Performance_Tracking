@@ -14,8 +14,6 @@ def get_data():
 
 financial, revenue, qualitative, extraction = get_data()
 
-st.sidebar.image("data/logo.jpeg", width=180)
-
 st.title("Performance Tracking Dashboard")
 st.caption("Acompanhamento de performance por Platform, país, KPI e período — baseado no ficheiro log_scorecardPerformanceTracking.xlsx")
 
