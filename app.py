@@ -42,10 +42,52 @@ variance = actual - budget
 achievement = actual / budget if budget else None
 on_target = (f["Status"] == "On target").mean() if len(f) else 0
 
+
+def format_currency_dynamic(value):
+    abs_value = abs(value)
+
+    if abs_value >= 1_000_000_000:
+        return f"€{value / 1_000_000_000:.1f}Bn"
+    elif abs_value >= 1_000_000:
+        return f"€{value / 1_000_000:.1f}m"
+    elif abs_value >= 1_000:
+        return f"€{value / 1_000:.1f}K"
+    else:
+        return f"€{value:,.0f}"
+
+
+def metric_color(value):
+    if value < 0:
+        return "red"
+    elif value > 0:
+        return "green"
+    else:
+        return "gray"
+
+
+def colored_metric(container, label, value):
+    color = metric_color(value)
+    formatted_value = format_currency_dynamic(value)
+
+    container.markdown(
+        f"""
+        <div style="font-size:14px; color:#6c757d; margin-bottom:4px;">
+            {label}
+        </div>
+        <div style="font-size:28px; font-weight:700; color:{color};">
+            {formatted_value}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
 c1, c2, c3, c4 = st.columns(4)
-c1.metric("Actual 2026", f"€{actual:,.0f}")
-c2.metric("Budget 2026", f"€{budget:,.0f}")
-c3.metric("Variance", f"€{variance:,.0f}")
+
+colored_metric(c1, "Actual 2026", actual)
+colored_metric(c2, "Budget 2026", budget)
+colored_metric(c3, "Variance", variance)
+
 c4.metric("KPIs On Target", f"{on_target:.0%}")
 
 financial_tab, revenue_tab, qualitative_tab, data_tab = st.tabs(["Finance KPIs", "Revenue / EBITDA", "Qualitativos", "Dados"])
