@@ -39,8 +39,8 @@ f = financial.loc[mask].copy()
 actual = f["2026 Actual"].sum()
 budget = f["2026 Budget"].sum()
 variance = actual - budget
-#achievement = actual / budget if budget else None
-#on_target = (f["Status"] == "On target").mean() if len(f) else 0
+achievement = actual / budget if budget else None
+on_target = (f["Status"] == "On target").mean() if len(f) else 0
 
 
 def format_currency_dynamic(value):
