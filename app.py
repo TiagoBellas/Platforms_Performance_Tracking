@@ -36,7 +36,7 @@ mask = (
 )
 f = financial.loc[mask].copy()
 
-
+st.image("logo.jpeg", width=180)
 
 actual = f["2026 Actual"].sum()
 budget = f["2026 Budget"].sum()
