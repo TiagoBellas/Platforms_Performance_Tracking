@@ -14,17 +14,17 @@ def get_data():
 
 financial, revenue, qualitative, extraction = get_data()
 
-st.title("Performance Tracking Dashboard")
-st.caption("Acompanhamento de performance por Platform, país, KPI e período — baseado no ficheiro log_scorecardPerformanceTracking.xlsx")
+st.title("Scorecard Performance Tracking")
+st.caption("Performance tracking by platform, country, KPI, and period")
 
 with st.sidebar:
-    st.header("Filtros")
+    st.header("Filters")
     periods = sorted(financial["Period"].dropna().unique().tolist())
-    selected_periods = st.multiselect("Período", periods, default=periods)
+    selected_periods = st.multiselect("Period", periods, default=periods)
     platforms = sorted(financial["Platform"].dropna().unique().tolist())
     selected_platforms = st.multiselect("Platform", platforms, default=platforms)
     countries = sorted(financial["Country"].dropna().unique().tolist())
-    selected_countries = st.multiselect("País", countries, default=countries)
+    selected_countries = st.multiselect("Country", countries, default=countries)
     kpis = sorted(financial["KPI"].dropna().unique().tolist())
     selected_kpis = st.multiselect("KPI", kpis, default=kpis)
 
@@ -39,8 +39,8 @@ f = financial.loc[mask].copy()
 actual = f["2026 Actual"].sum()
 budget = f["2026 Budget"].sum()
 variance = actual - budget
-achievement = actual / budget if budget else None
-on_target = (f["Status"] == "On target").mean() if len(f) else 0
+#achievement = actual / budget if budget else None
+#on_target = (f["Status"] == "On target").mean() if len(f) else 0
 
 
 def format_currency_dynamic(value):
@@ -90,19 +90,19 @@ colored_metric(c3, "Variance", variance)
 
 c4.metric("KPIs On Target", f"{on_target:.0%}")
 
-financial_tab, revenue_tab, qualitative_tab, data_tab = st.tabs(["Finance KPIs", "Revenue / EBITDA", "Qualitativos", "Dados"])
+financial_tab, revenue_tab, qualitative_tab, data_tab = st.tabs(["Finance KPIs", "Revenue / EBITDA", "Qualitatives", "Data"])
 
 with financial_tab:
     left, right = st.columns([1.1, 0.9])
     with left:
-        st.subheader("Actual vs Budget por Platform")
+        st.subheader("Actual vs Budget by Platform")
         st.plotly_chart(platform_bar(f), use_container_width=True)
     with right:
         st.subheader("Achievement heatmap")
         st.plotly_chart(heatmap_status(f), use_container_width=True)
-    st.subheader("Dispersão por país")
+    st.subheader("Dispersion by country")
     st.plotly_chart(country_kpi_scatter(f), use_container_width=True)
-    st.subheader("Tabela de KPIs financeiros")
+    st.subheader("Financial KPIs table")
     st.dataframe(
         f[["Platform", "Country", "KPI", "Period", "2026 Budget", "2026 Actual", "Variance", "Achievement %", "Status", "Investment Platform Weighting", "Servicing Platform Weighting"]]
         .sort_values(["Country", "Platform", "KPI"]),
