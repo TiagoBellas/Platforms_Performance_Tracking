@@ -24,11 +24,11 @@ st.markdown(
     }
 
     section[data-testid="stSidebar"] {
-        background-color: #E8EEF5;
+        background-color: #696969;
     }
 
     section[data-testid="stSidebar"] * {
-        color: #0B1F3A;
+        color: #696969;
     }
 
     button[data-baseweb="tab"] {
