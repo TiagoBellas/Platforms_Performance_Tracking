@@ -8,7 +8,60 @@ from src.charts import platform_bar, heatmap_status, country_kpi_scatter, revenu
 
 st.set_page_config(page_title="Performance Tracking Dashboard", page_icon="📊", layout="wide")
 
-st.image("data/logo.jpg", width=180)
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #F5F7FA;
+    }
+
+    h1 {
+        color: #0B1F3A;
+    }
+
+    h2, h3 {
+        color: #12355B;
+    }
+
+    section[data-testid="stSidebar"] {
+        background-color: #E8EEF5;
+    }
+
+    section[data-testid="stSidebar"] * {
+        color: #0B1F3A;
+    }
+
+    button[data-baseweb="tab"] {
+        background-color: #FFFFFF;
+        color: #0B1F3A;
+        border-radius: 8px 8px 0 0;
+        padding: 8px 16px;
+    }
+
+    button[data-baseweb="tab"][aria-selected="true"] {
+        background-color: #0B1F3A;
+        color: #FFFFFF;
+    }
+
+    .stButton > button,
+    .stDownloadButton > button {
+        background-color: #0B1F3A;
+        color: #FFFFFF;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .stButton > button:hover,
+    .stDownloadButton > button:hover {
+        background-color: #12355B;
+        color: #FFFFFF;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.image("assets/logo.jpeg", width=180)
 
 @st.cache_data(show_spinner=False)
 def get_data():
