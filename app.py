@@ -61,7 +61,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.image("assets/logo.jpeg", width=180)
+st.image("data/logo.jpg", width=180)
 
 @st.cache_data(show_spinner=False)
 def get_data():
