@@ -16,11 +16,11 @@ st.markdown(
     }
 
     h1 {
-        color: #0B1F3A;
+        color: #696969;
     }
 
     h2, h3 {
-        color: #12355B;
+        color: #696969;
     }
 
     section[data-testid="stSidebar"] {
