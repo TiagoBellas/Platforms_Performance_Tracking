@@ -8,6 +8,8 @@ from src.charts import platform_bar, heatmap_status, country_kpi_scatter, revenu
 
 st.set_page_config(page_title="Performance Tracking Dashboard", page_icon="📊", layout="wide")
 
+st.image("assets/logo.jpeg", width=180)
+
 @st.cache_data(show_spinner=False)
 def get_data():
     return load_financial_kpis(), load_revenue(), load_qualitative(), load_extraction_summary()
